@@ -8,7 +8,7 @@ last-reviewed: 2026-10-03
 
 # Plano de implementação do ExpenseHub
 
-Este plano transforma o checkpoint de C# em entregas verificáveis por issue. O objetivo é implementar a API inteira, demonstrar autorização e alcançar score 100 no pipeline oficial, com documentação interativa e demonstração HTTP automatizada. Público: integrantes do grupo. As decisões técnicas e os extras são propostas do grupo, identificadas separadamente das exigências do professor. Plano revisado em 03/10/2026; execução iniciada. As 13 rotas obrigatórias, os unitários e as provas SQLite estão implementados e validados localmente; o [registro de execução](EXECUCAO.md) distingue resultados reais das entregas ainda previstas.
+Este plano transforma o checkpoint de C# em entregas verificáveis por issue. O objetivo é implementar a API inteira, demonstrar autorização e alcançar score 100 no pipeline oficial, com documentação interativa e demonstração HTTP automatizada. Público: integrantes do grupo. As decisões técnicas e os extras são propostas do grupo, identificadas separadamente das exigências do professor. Plano revisado em 03/10/2026; execução iniciada. As 13 rotas obrigatórias, os unitários, as provas SQLite, Scalar e a demo estão implementados; CI de M03 confirmou score 100 e 104 cenários HTTP; o [registro de execução](EXECUCAO.md) distingue resultados reais das entregas ainda previstas.
 
 A prioridade escolhida pelo usuário é **API com documentação interativa e demonstração automatizada**. O escopo adicional inclui Scalar, provas de persistência/concorrência e relatórios reproduzíveis. O contrato das 13 rotas obrigatórias continua sendo a base da entrega.
 
@@ -29,7 +29,7 @@ A referência inspecionada é o [template original](https://github.com/Racass/ch
 - O template contém API `net10.0`, MSTest 4.0.2, `/health` e OpenAPI. Domínio, persistência, Identity e testes funcionais ainda precisam ser implementados.
 - A base de conhecimento contém somente seu README; nenhum fato ou runbook aplicável foi encontrado.
 - Entrega: **13/10/2026**, conforme o [enunciado](https://github.com/Racass/checkpoint-csharpracass-expensehub/blob/main/docs/ENUNCIADO.md). Horário não informado; proposta: concluir em 12/10.
-- Cadastro do grupo: o anúncio informa encerramento em **30/09/2026**. O Forms responde por HTTP, mas não foi possível confirmar pela interface se aceita respostas. Nenhuma resposta foi enviada. Confirmar registro existente ou regularizar a situação com o professor.
+- Cadastro do grupo: o anúncio informa encerramento em **30/09/2026**. Em 03/10, Chromium confirmou o formulário aberto com 11 campos e botão Submit habilitado. Foi preparado um rascunho ExpenseHub com a equipe e o repositório, sem envio. Falta confirmar se já existe cadastro antes de enviar uma nova resposta; se necessário, regularizar a situação com o professor.
 
 ### Ambiente e verificações realizadas
 
@@ -483,7 +483,7 @@ Autoria do commit e autenticação do push são diferentes. Nome/e-mail não aut
 
 A [divisão detalhada](DIVISAO-TRABALHO.md) distribui 24 pacotes, oito e 40 unidades de esforço por integrante. João conduz fundação, Identity, envio, infraestrutura de erro e CI; Matheus conduz roles, Draft, consultas/histórico e Scalar; André conduz domínio, autorização, decisões/pagamento e demo HTTP. Os três implementam testes unitários, provas SQLite, documentação e validação final, com revisão cruzada.
 
-Cada aluno registra os próprios commits, sem trailers `Co-authored-by`, conforme solicitado. O plano prevê oito marcos de evolução por pessoa, sem transformar a contagem em quota ou fragmentar mudanças artificialmente. Na entrega, conferir pelo menos dois commits reais por integrante na `main`, associação dos três e-mails às contas GitHub e preservação da autoria nos merges. Nomes, RMs, e-mails informados e o login pendente de André constam no documento de divisão.
+Cada aluno registra os próprios commits, sem trailers `Co-authored-by`, conforme solicitado. O plano prevê oito marcos de evolução por pessoa, sem transformar a contagem em quota ou fragmentar mudanças artificialmente. Na entrega, conferir pelo menos dois commits reais por integrante na `main`, associação dos três e-mails às contas GitHub e preservação da autoria nos merges. Nomes, RMs, e-mails informados e os três logins identificados constam no documento de divisão.
 
 ## Cronograma proposto
 
@@ -507,27 +507,27 @@ Nenhum extra altera uma rota obrigatória sem preservar seu contrato. Cada entre
 
 - [ ] Cadastro do grupo confirmado ou regularizado com o professor.
 - [ ] Repositório público por template, colaboradores e professor com acesso.
-- [ ] Nome completo e RM dos três integrantes no cabeçalho da entrega/README.
+- [x] Nome completo e RM dos três integrantes no cabeçalho da entrega/README.
 - [ ] Mais de um commit real por integrante preservado na main.
 - [ ] Pacotes de João, Matheus e André concluídos/revistos conforme a divisão de trabalho.
 - [ ] Três e-mails de autoria associados aos perfis corretos, sem trailers Co-authored-by ou autoria de IA.
 - [ ] Dez issues com PR/evidência correspondente.
 - [ ] SDK/runtime documentados; restore/build/test normais em clone limpo.
-- [ ] Banco persistente e criado por procedimento reproduzível.
-- [ ] Seed somente de um Admin inicial, idempotente e sem credenciais versionadas.
-- [ ] Cadastro, bearer, roles e novo login demonstrados.
-- [ ] Todos os 13 endpoints com positivos, negativos e códigos HTTP corretos.
-- [ ] Roles acumuladas, ownership, estados, Admin/Auditor e isolamento verificados.
-- [ ] Histórico completo, pagamento único e falhas sem gravação parcial.
-- [ ] Unitários próprios significativos, sem banco/rede, detectando regressões.
-- [ ] Controles e testes do corretor preservados e executados.
+- [x] Banco persistente e criado por procedimento reproduzível.
+- [x] Seed somente de um Admin inicial, idempotente e sem credenciais versionadas.
+- [x] Cadastro, bearer, roles e novo login demonstrados.
+- [x] Todos os 13 endpoints com positivos, negativos e códigos HTTP corretos.
+- [x] Roles acumuladas, ownership, estados, Admin/Auditor e isolamento verificados.
+- [x] Histórico completo, pagamento único e falhas sem gravação parcial.
+- [x] Unitários próprios significativos, sem banco/rede, detectando regressões.
+- [x] Controles e testes do corretor preservados e executados.
 - [ ] Score 100, zero erros/warnings e sem findings bloqueantes no SHA final.
-- [ ] README com provider, setup, migrations, configuração, payloads e comandos.
-- [ ] Arquivo HTTP utilizável sem senha/token literal.
-- [ ] Scalar funciona no navegador com login e chamada autenticada; schema OpenAPI confere as 13 rotas.
-- [ ] Bearer do Identity documentado corretamente, com register/login públicos e sem tokens preenchidos.
-- [ ] Demo HTTP automatizada passa e falha quando uma assertiva obrigatória diverge.
-- [ ] Provas SQLite demonstram concorrência, unicidade e rollback sem dependências externas.
-- [ ] Relatórios da demo identificam SHA/cenários sem expor credenciais.
-- [ ] Workflow adicional de demo executado sem modificar o workflow oficial.
+- [x] README com provider, setup, migrations, configuração, payloads e comandos.
+- [x] Arquivo HTTP utilizável sem senha/token literal.
+- [x] Scalar funciona no navegador com login e chamada autenticada; schema OpenAPI confere as 13 rotas.
+- [x] Bearer do Identity documentado corretamente, com register/login públicos e sem tokens preenchidos.
+- [x] Demo HTTP automatizada passa e falha quando uma assertiva obrigatória diverge.
+- [x] Provas SQLite demonstram concorrência, unicidade e rollback sem dependências externas.
+- [x] Relatórios da demo identificam SHA/cenários sem expor credenciais.
+- [x] Workflow adicional de demo executado sem modificar o workflow oficial.
 - [ ] URL pública, SHA exato e links dos workflows registrados na entrega.

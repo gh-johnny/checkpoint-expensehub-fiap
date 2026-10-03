@@ -22,7 +22,7 @@ Repositório público, criado por template e sem fork: [gh-johnny/checkpoint-exp
 
 A [PR de planejamento #1](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/1) foi integrada após aprovação humana, com merge `ec3955913abdc6f772f1c31d871771d8fe551708`. Seu commit de trabalho é `f6535c68e87caf550b9223ac393ccb9c0912b457`.
 
-A conta autenticada nesta sessão é João. Os commits usam sua configuração real, sem coautoria de IA. A participação de Matheus e André permanece pendente de contribuições próprias; o desenvolvimento automatizado não cria evidência de autoria deles. O login GitHub de André ainda não foi informado.
+A conta autenticada nesta sessão é João. Os commits usam sua configuração real, sem coautoria de IA. A participação de Matheus e André permanece pendente de contribuições próprias; o desenvolvimento automatizado não cria evidência de autoria deles. O login de André, andrenakarocha, foi identificado pela correspondência exata do e-mail em consulta autenticada à API pública de usuários do GitHub; não foram enviados convites nesta consulta.
 
 ## Ambiente verificado
 
@@ -46,9 +46,9 @@ A conta autenticada nesta sessão é João. Os commits usam sua configuração r
 | I08 — pagamento/histórico | [PR #9](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/9), SHA a1ab905; CI score 100, zero findings; 65 verificações HTTP e rollback real. |
 | I09 — unitários próprios | [PR #10](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/10), SHA 6ea57f9; 111 testes; CI score 100, zero findings/warnings. |
 | M01 — integração SQLite | [PR #11](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/11), SHA 30bbd4b; oito testes; CI score 100, zero findings/warnings. |
-| I10 — qualidade final | Pendente do SHA final integrado na main. |
+| I10 — qualidade final | [PR #14](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/14): candidato 6256221 passou score 100 sem findings/warnings e demo 104/104; ainda depende do SHA final integrado na main. |
 | M02 — Scalar/OpenAPI | [PR #12](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/12), SHA 39dcc7a; CI score 100, zero findings/warnings; Chromium executou login e consulta protegida com 200. |
-| M03 — demo automatizada/CI adicional | Demo HTTP implementada: 104 cenários passaram; prova negativa retorna erro com relatório failed. Executor completo passou com build sem warnings, 119 testes e migration; workflow ainda aguarda publicação. |
+| M03 — demo automatizada/CI adicional | [PR #13](https://github.com/gh-johnny/checkpoint-expensehub-fiap/pull/13), SHA 4590d4e; CI oficial score 100 sem findings/warnings; demo push e PR passaram 104/104, com SHA exato e artefatos sanitizados. |
 | Participação individual dos três | Pendente de contribuições próprias de Matheus e André. |
 
 ## Evidências da fundação
@@ -112,4 +112,31 @@ Chromium carregou `/docs`, sem erros de JavaScript. A renderização foi inspeci
 
 A [demo versionada](DEMO.md) executou 104 cenários HTTP com SQLite descartável: rotas/OpenAPI, bearer e roles, isolamento, Draft/edição, validações, Paid, Rejected, histórico e proibição de autoação com todas as roles. Os relatórios JSON/Markdown não incluem credenciais, bearer, headers ou corpos. Inspeção também confirmou ausência das credenciais e do token Admin usados na execução.
 
-Uma execução com o host já encerrado terminou com saída 1, status failed, zero cenários aprovados e uma falha Health sem status HTTP observado. Falha real não é convertida em sucesso. O leitor da demo decodifica UTF-8 quando PowerShell devolve application/problem+json como bytes. O executor usa migrations reais em arquivo exclusivo, credencial gerada e processo próprio; seu workflow publica somente relatórios sanitizados. O ciclo completo passou localmente: restore, build sem warnings, 111 unitários, oito integrações, migration e 104 cenários HTTP. O diretório temporário foi removido. O workflow ainda precisa do relatório do SHA publicado; o relatório local identifica a árvore de trabalho e não comprova um novo commit.
+Uma execução com o host já encerrado terminou com saída 1, status failed, zero cenários aprovados e uma falha Health sem status HTTP observado. Falha real não é convertida em sucesso. O leitor da demo decodifica UTF-8 quando PowerShell devolve application/problem+json como bytes. O executor usa migrations reais em arquivo exclusivo, credencial gerada e processo próprio; seu workflow publica somente relatórios sanitizados. O ciclo completo passou localmente: restore, build sem warnings, 111 unitários, oito integrações, migration e 104 cenários HTTP. O diretório temporário foi removido. O [workflow oficial de M03](https://github.com/gh-johnny/checkpoint-expensehub-fiap/actions/runs/37102752052) confirmou score 100, zero findings/warnings/erros/caps e três projetos no SHA 4590d4e37cb854c3cd56b09d6feadab57b227ba7. A [demo do push](https://github.com/gh-johnny/checkpoint-expensehub-fiap/actions/runs/37102752098) e a [demo da PR](https://github.com/gh-johnny/checkpoint-expensehub-fiap/actions/runs/37102758409) passaram 104/104; report.commit coincide com esse SHA. Os dois artefatos contêm somente os campos previstos e passaram no Gitleaks.
+
+
+## Conferência final antes da integração
+
+A entrega I10 acrescenta o arquivo HTTP manual completo e mascaramento add-mask para as credenciais temporárias no GitHub Actions. Foram enviadas 26 requisições reais a partir dos templates, incluindo preparação dos três perfis, edição, Paid e Rejected. Credenciais foram resolvidas externamente e tokens ficaram em memória. Os parsers PowerShell aceitaram ambos os scripts.
+
+O código e os extras estão implementados; somente a PR de planejamento foi integrada. PRs de implementação continuam abertas para integração após aprovação. A qualidade e a demo do SHA final da main ainda precisam ser conferidas depois dos merges. A conclusão acadêmica também depende das contribuições próprias de Matheus e André e do cadastro do grupo, sem atribuição retroativa de autoria.
+
+A demo também foi executada com credencial Admin deliberadamente incorreta: quatro cenários anteriores passaram e o quinto falhou, com 401 observado contra 200 esperado, saída 1 e relatório failed. O add-mask foi emitido para a credencial gerada; ela permaneceu ausente dos relatórios. Uma falha de ferramenta no bootstrap produziu relatório de fase tool restore e apagou o diretório temporário. Essas provas validam falha por assertiva HTTP e falha anterior ao host.
+
+
+## Auditoria adicional do plano
+
+As três falhas previstas na seção de I09 foram aplicadas uma de cada vez em cópia descartável do SHA 6256221a6b4e317dcf3490a76ac30acc6b8773a0. A cópia original passou nos 111 unitários. Remover o bloqueio de autoação fez falhar cinco casos de OwnerCannotDecideEvenWithAllRoles; permitir nova aprovação de Approved fez falhar ApprovalDoesNotReuseReadVisibility; reduzir MinimumLength da justificativa de 10 para 5 fez falhar o caso de nove caracteres de RejectionReasonBoundaries. Os TRX confirmam falhas de assertivas, não de compilação. Hashes dos arquivos originais permaneceram iguais; a cópia foi removida. Isso comprova detecção desses três defeitos específicos, sem alegar uma taxa geral de mutation testing.
+
+Uma prova HTTP adicional reiniciou o processo da API usando o mesmo SQLite depois de cadastrar Employee por HTTP e criar Draft com valor 25,501. Após o reinício, novo login com as credenciais existentes funcionou e as respostas de despesa/histórico ficaram idênticas. A senha Admin existente continuou válida mesmo com outra senha de bootstrap no segundo início. O banco manteve dois usuários (Admin e Employee HTTP), uma atribuição Admin e cinco roles. A prova externa registrou somente resultados; não persistiu credenciais ou bearer.
+
+A última revalidação read-only confirmou PRs #2–#14 abertas, controles originais intactos, workflows do candidato completed/success e main ainda no merge de planejamento ec3955913abdc6f772f1c31d871771d8fe551708. Estas evidências adicionais não representam integração na main nem participação de outros autores.
+
+
+## Correlação de erros e preparação do cadastro
+
+A auditoria encontrou traceIds diferentes entre os erros nativos 401/403 e o RequestAuditMiddleware: o writer padrão já havia preenchido um identificador de Activity, preservado pelo TryAdd. O Customizer passou a atribuir HttpContext.TraceIdentifier, o mesmo valor do log de auditoria. O build passou sem warnings. Oito casos HTTP confirmaram traceId e status correspondentes no log: anonimato, bearer inválido, role negada no middleware, entrada inválida, rota ausente, despesa invisível, estado repetido e falha SQLite controlada. Cobrem 400, 401, 403, 404, 409 e 500; não foi incluído payload secreto no relatório. A falha do provider foi provocada somente no banco descartável externo.
+
+Após identificar o login de André, foram criados convites GitHub de escrita para imneli e andrenakarocha, com HTTP 201 e estado pending. Ainda aguardam aceite e contribuições próprias. Permissões de Admin/maintain não foram concedidas. A main continua aguardando aprovação de integração.
+
+O formulário fornecido foi aberto em Chromium e continua exibindo 11 campos e Submit habilitado, apesar da data de encerramento anunciada. Rascunho validado: grupo ExpenseHub, nomes completos/RMs da equipe, URLs dos três perfis e URL do repositório público do grupo. Nenhuma resposta foi enviada. A interface não permite conferir respostas anteriores; foi solicitada confirmação de cadastro existente antes de novo envio.
